@@ -30,9 +30,9 @@ def apply_502030_rule(monthly_income):
     """
     Function to apply the 50/30/20 budgeting rule.
     """
-    needs = monthly_income * 0.50  # 50% for needs
+    needs = monthly_income * 0.60  # 50% for needs
     wants = monthly_income * 0.30  # 30% for wants
-    savings = monthly_income * 0.20  # 20% for savings/debt repayment
+    savings = monthly_income * 0.10  # 20% for savings/debt repayment
     return needs, wants, savings
 
 # App layout
@@ -41,7 +41,7 @@ st.title("📊 Rent and Budget Calculator")
 # Adding a description
 st.markdown("""
 This tool helps you calculate your remaining monthly income after accounting for your 401k contribution, taxes, rent, and personal expenses. 
-It also provides a budget allocation based on the 50/30/20 rule, both theoretically and actually based on your expenses.
+It also provides a budget allocation based on the 60/30/10 rule, both theoretically and actually based on your expenses.
 Fill in the details below and click 'Calculate' to see your results.
 """)
 
