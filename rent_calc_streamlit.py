@@ -38,18 +38,19 @@ This tool helps you calculate your remaining monthly income after accounting for
 Fill in the details below and click 'Calculate' to see your results.
 """)
 
-# Sidebar for inputs
-with st.sidebar:
-    st.header("Input Your Details")
+# Input fields
+col1, col2 = st.columns(2)
+with col1:
     yearly_income = st.number_input("Yearly Income", min_value=0)
-    contribution_percentage = st.number_input("401k Contribution Percentage", min_value=0.0, max_value=100.0)
     rent_price = st.number_input("Monthly Rent Price", min_value=0)
-    personal_expenses = st.number_input("Monthly Personal Expenses", min_value=0)
-    calculate_button = st.button("Calculate")
 
-# Main page layout for displaying the result
-if calculate_button:
+with col2:
+    contribution_percentage = st.number_input("401k Contribution Percentage", min_value=0, max_value=100)
+    personal_expenses = st.number_input("Monthly Personal Expenses", min_value=0)
+
+# Calculate button
+if st.button("Calculate Remaining Monthly Income"):
     remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
 
-# Optional: You can add more sections or visualizations here if relevant.
+# Optional: Add more interactive or informative sections as needed.
