@@ -7,7 +7,7 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
     :param contribution_percentage: Percentage of income contributed to 401k.
     :param rent_price: Monthly rent price.
     :param personal_expenses: Monthly personal expenses.
-    :return: Remaining monthly income after all deductions and expenses.
+    :return: Remaining monthly income after all deductions and expenses, and budget allocation.
     """
     # Calculate salary after 401k contribution
     salary_after_contribution = yearly_income * (1 - (contribution_percentage / 100))
@@ -27,7 +27,10 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
     # Convert to monthly
     remaining_monthly_income = remaining_annual_income / 12
 
-    return remaining_monthly_income
+    # Apply the 50/30/20 budget rule
+    needs, wants, savings = apply_502030_rule(remaining_monthly_income)
+
+    return remaining_monthly_income, needs, wants, savings
 
 def apply_502030_rule(monthly_income):
     """
@@ -41,11 +44,12 @@ def apply_502030_rule(monthly_income):
     return needs, wants, savings
 
 # App layout
-st.title("📊 Rent Calculator")
+st.title("📊 Rent and Budget Calculator")
 
 # Adding a description
 st.markdown("""
 This tool helps you calculate your remaining monthly income after accounting for your 401k contribution, taxes, rent, and personal expenses.
+It also provides a budget allocation based on the 50/30/20 rule.
 Fill in the details below and click 'Calculate' to see your results.
 """)
 
@@ -60,19 +64,12 @@ with col2:
     personal_expenses = st.number_input("Monthly Personal Expenses", min_value=0)
 
 # Calculate button
-# if st.button("Calculate Remaining Monthly Income"):
-#     remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
-#     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
-
-
-# Calculate button
-if st.button("Calculate Remaining Monthly Income"):
+if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
     remaining_monthly_income, needs, wants, savings = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
     st.markdown(f"#### Budget Allocation:")
     st.markdown(f"- Needs (50%): ${needs:.2f}")
     st.markdown(f"- Wants (30%): ${wants:.2f}")
     st.markdown(f"- Savings/Debt Repayment (20%): ${savings:.2f}")
-
 
 # Optional: Add more interactive or informative sections as needed.
