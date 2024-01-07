@@ -63,7 +63,7 @@ if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
     actual_remaining_income, (theo_needs, theo_wants, theo_savings), (act_needs, act_wants, act_savings), remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     needs, wants, savings, need_percentage, wants_percentage, savings_percentage = apply_502030_rule(yearly_income)
     st.markdown(f"### Remaining Monthly Income: ${actual_remaining_income:.2f}")
-    st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income: {remaining_monthly_income}):")
+    st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income: ${int(remaining_monthly_income)}):")
     st.markdown(f"- Needs ({int(need_percentage * 100)}%): ${theo_needs:.2f}")
     st.markdown(f"- Wants ({int(wants_percentage * 100)}%): ${theo_wants:.2f}")
     st.markdown(f"- Savings ({int(savings_percentage * 100)}%): ${theo_savings:.2f}")
