@@ -2,12 +2,8 @@ import streamlit as st
 
 def calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses):
     """
-    Function to calculate the remaining monthly income after expenses.
-    :param yearly_income: Annual income before any deductions.
-    :param contribution_percentage: Percentage of income contributed to 401k.
-    :param rent_price: Monthly rent price.
-    :param personal_expenses: Monthly personal expenses.
-    :return: Remaining monthly income after all deductions and expenses, and budget allocation.
+    Function to calculate the remaining monthly income after expenses and 
+    provide both theoretical and actual budget allocations based on the 50/30/20 rule.
     """
     # Calculate salary after 401k contribution
     salary_after_contribution = yearly_income * (1 - (contribution_percentage / 100))
@@ -18,25 +14,21 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
     # Calculate salary after taxes
     salary_after_tax = salary_after_contribution * (1 - (tax_rate / 100))
 
-    # Calculate total annual expenses (rent + personal expenses)
-    total_annual_expenses = (rent_price * 12) + (personal_expenses * 12)
+    # Calculate remaining monthly income
+    remaining_monthly_income = salary_after_tax / 12
 
-    # Calculate remaining annual income
-    remaining_annual_income = salary_after_tax - total_annual_expenses
+    # Theoretical budget allocation based on net income
+    theoretical_needs, theoretical_wants, theoretical_savings = apply_502030_rule(remaining_monthly_income)
 
-    # Convert to monthly
-    remaining_monthly_income = remaining_annual_income / 12
+    # Actual budget allocation after rent and personal expenses
+    actual_remaining_income = remaining_monthly_income - rent_price - personal_expenses
+    actual_needs, actual_wants, actual_savings = apply_502030_rule(actual_remaining_income)
 
-    # Apply the 50/30/20 budget rule
-    needs, wants, savings = apply_502030_rule(remaining_monthly_income)
-
-    return remaining_monthly_income, needs, wants, savings
+    return remaining_monthly_income, (theoretical_needs, theoretical_wants, theoretical_savings), (actual_needs, actual_wants, actual_savings)
 
 def apply_502030_rule(monthly_income):
     """
     Function to apply the 50/30/20 budgeting rule.
-    :param monthly_income: Monthly net income.
-    :return: Tuple of amounts allocated to needs, wants, and savings.
     """
     needs = monthly_income * 0.50  # 50% for needs
     wants = monthly_income * 0.30  # 30% for wants
@@ -48,8 +40,8 @@ st.title("📊 Rent and Budget Calculator")
 
 # Adding a description
 st.markdown("""
-This tool helps you calculate your remaining monthly income after accounting for your 401k contribution, taxes, rent, and personal expenses.
-It also provides a budget allocation based on the 50/30/20 rule.
+This tool helps you calculate your remaining monthly income after accounting for your 401k contribution, taxes, rent, and personal expenses. 
+It also provides a budget allocation based on the 50/30/20 rule, both theoretically and actually based on your expenses.
 Fill in the details below and click 'Calculate' to see your results.
 """)
 
@@ -65,11 +57,15 @@ with col2:
 
 # Calculate button
 if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
-    remaining_monthly_income, needs, wants, savings = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
+    remaining_monthly_income, (theo_needs, theo_wants, theo_savings), (act_needs, act_wants, act_savings) = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
-    st.markdown(f"#### Budget Allocation:")
-    st.markdown(f"- Needs (50%): ${needs:.2f}")
-    st.markdown(f"- Wants (30%): ${wants:.2f}")
-    st.markdown(f"- Savings/Debt Repayment (20%): ${savings:.2f}")
+    st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income):")
+    st.markdown(f"- Needs (50%): ${theo_needs:.2f}")
+    st.markdown(f"- Wants (30%): ${theo_wants:.2f}")
+    st.markdown(f"- Savings/Debt Repayment (20%): ${theo_savings:.2f}")
+    st.markdown(f"#### Actual Budget Allocation (After Rent and Personal Expenses):")
+    st.markdown(f"- Needs: ${act_needs:.2f}")
+    st.markdown(f"- Wants: ${act_wants:.2f}")
+    st.markdown(f"- Savings/Debt Repayment: ${act_savings:.2f}")
 
 # Optional: Add more interactive or informative sections as needed.
