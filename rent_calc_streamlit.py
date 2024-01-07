@@ -29,6 +29,17 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
 
     return remaining_monthly_income
 
+def apply_502030_rule(monthly_income):
+    """
+    Function to apply the 50/30/20 budgeting rule.
+    :param monthly_income: Monthly net income.
+    :return: Tuple of amounts allocated to needs, wants, and savings.
+    """
+    needs = monthly_income * 0.50  # 50% for needs
+    wants = monthly_income * 0.30  # 30% for wants
+    savings = monthly_income * 0.20  # 20% for savings/debt repayment
+    return needs, wants, savings
+
 # App layout
 st.title("📊 Rent Calculator")
 
@@ -52,5 +63,16 @@ with col2:
 if st.button("Calculate Remaining Monthly Income"):
     remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
+
+
+# Calculate button
+if st.button("Calculate Remaining Monthly Income"):
+    remaining_monthly_income, needs, wants, savings = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
+    st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
+    st.markdown(f"#### Budget Allocation:")
+    st.markdown(f"- Needs (50%): ${needs:.2f}")
+    st.markdown(f"- Wants (30%): ${wants:.2f}")
+    st.markdown(f"- Savings/Debt Repayment (20%): ${savings:.2f}")
+
 
 # Optional: Add more interactive or informative sections as needed.
