@@ -18,11 +18,11 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
     remaining_monthly_income = salary_after_tax / 12
 
     # Theoretical budget allocation based on net income
-    theoretical_needs, theoretical_wants, theoretical_savings = apply_502030_rule(remaining_monthly_income)
+    theoretical_needs, theoretical_wants, theoretical_savings, _, _, _ = apply_502030_rule(remaining_monthly_income)
 
     # Actual budget allocation after rent and personal expenses
     actual_remaining_income = remaining_monthly_income - rent_price - personal_expenses
-    actual_needs, actual_wants, actual_savings, need_percentage, wants_percentage, savings_percentage = apply_502030_rule(actual_remaining_income)
+    actual_needs, actual_wants, actual_savings, _, _, _ = apply_502030_rule(actual_remaining_income)
 
     return actual_remaining_income, (theoretical_needs, theoretical_wants, theoretical_savings), (actual_needs, actual_wants, actual_savings)
 
