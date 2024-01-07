@@ -60,9 +60,9 @@ with col2:
     personal_expenses = st.number_input("Monthly Personal Expenses", min_value=0)
 
 # Calculate button
-if st.button("Calculate Remaining Monthly Income"):
-    remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
-    st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
+# if st.button("Calculate Remaining Monthly Income"):
+#     remaining_monthly_income = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
+#     st.markdown(f"### Remaining Monthly Income: ${remaining_monthly_income:.2f}")
 
 
 # Calculate button
