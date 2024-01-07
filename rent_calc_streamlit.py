@@ -30,7 +30,7 @@ def calculate_finances(yearly_income, contribution_percentage, rent_price, perso
     return remaining_monthly_income
 
 # App layout
-st.title("📊 Finance Calculator")
+st.title("📊 Rent Calculator")
 
 # Adding a description
 st.markdown("""
