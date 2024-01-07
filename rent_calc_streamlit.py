@@ -57,7 +57,7 @@ with col2:
 
 # Calculate button
 if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
-    remaining_monthly_income, (theo_needs, theo_wants, theo_savings), (act_needs, act_wants, act_savings) = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
+    actual_remaining_income, (theo_needs, theo_wants, theo_savings), (act_needs, act_wants, act_savings) = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
     st.markdown(f"### Remaining Monthly Income: ${actual_remaining_income:.2f}")
     st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income):")
     st.markdown(f"- Needs (50%): ${theo_needs:.2f}")
