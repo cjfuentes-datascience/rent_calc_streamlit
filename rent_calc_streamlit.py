@@ -30,10 +30,13 @@ def apply_502030_rule(monthly_income):
     """
     Function to apply the 50/30/20 budgeting rule.
     """
-    needs = monthly_income * 0.60  # 50% for needs
-    wants = monthly_income * 0.30  # 30% for wants
-    savings = monthly_income * 0.10  # 20% for savings/debt repayment
-    return needs, wants, savings
+    need_percentage = 0.60
+    wants_percentage = 0.30
+    savings_percentage = 0.10
+    needs = monthly_income * need_percentage  # 50% for needs
+    wants = monthly_income * wants_percentage  # 30% for wants
+    savings = monthly_income * savings_percentage  # 20% for savings/debt repayment
+    return needs, wants, savings, need_percentage, wants_percentage, savings_percentage
 
 # App layout
 st.title("📊 Rent and Budget Calculator")
@@ -58,12 +61,12 @@ with col2:
 # Calculate button
 if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
     actual_remaining_income, (theo_needs, theo_wants, theo_savings), (act_needs, act_wants, act_savings) = calculate_finances(yearly_income, contribution_percentage, rent_price, personal_expenses)
-    needs, wants, savings = apply_502030_rule(yearly_income)
+    need_percentage, wants_percentage, savings_percentage = apply_502030_rule(yearly_income)
     st.markdown(f"### Remaining Monthly Income: ${actual_remaining_income:.2f}")
     st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income):")
-    st.markdown(f"- Needs ({needs}%): ${theo_needs:.2f}")
-    st.markdown(f"- Wants ({wants}%): ${theo_wants:.2f}")
-    st.markdown(f"- Savings/Debt Repayment ({savings}%): ${theo_savings:.2f}")
+    st.markdown(f"- Needs ({need_percentage}%): ${theo_needs:.2f}")
+    st.markdown(f"- Wants ({wants_percentage}%): ${theo_wants:.2f}")
+    st.markdown(f"- Savings/Debt Repayment ({savings_percentage}%): ${theo_savings:.2f}")
     st.markdown(f"#### Actual Budget Allocation (After Rent and Personal Expenses):")
     st.markdown(f"- Needs: ${act_needs:.2f}")
     st.markdown(f"- Wants: ${act_wants:.2f}")
