@@ -66,10 +66,10 @@ if st.button("Calculate Remaining Monthly Income and Budget Allocation"):
     st.markdown(f"#### Theoretical Budget Allocation (Based on Net Income):")
     st.markdown(f"- Needs ({int(need_percentage * 100)}%): ${theo_needs:.2f}")
     st.markdown(f"- Wants ({int(wants_percentage * 100)}%): ${theo_wants:.2f}")
-    st.markdown(f"- Savings/Debt Repayment ({int(savings_percentage * 100)}%): ${theo_savings:.2f}")
+    st.markdown(f"- Savings ({int(savings_percentage * 100)}%): ${theo_savings:.2f}")
     st.markdown(f"#### Actual Budget Allocation (After Rent and Personal Expenses):")
     st.markdown(f"- Needs: ${act_needs:.2f}")
     st.markdown(f"- Wants: ${act_wants:.2f}")
-    st.markdown(f"- Savings/Debt Repayment: ${act_savings:.2f}")
+    st.markdown(f"- Savings: ${act_savings:.2f}")
 
 # Optional: Add more interactive or informative sections as needed.
