@@ -30,9 +30,9 @@ def apply_502030_rule(monthly_income):
     """
     Function to apply the 50/30/20 budgeting rule.
     """
-    need_percentage = 0.60
+    need_percentage = 0.50
     wants_percentage = 0.30
-    savings_percentage = 0.10
+    savings_percentage = 0.20
     needs = monthly_income * need_percentage  # 50% for needs
     wants = monthly_income * wants_percentage  # 30% for wants
     savings = monthly_income * savings_percentage  # 20% for savings/debt repayment
